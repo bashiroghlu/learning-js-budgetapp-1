@@ -100,6 +100,25 @@ class UI {
     this.expenseAmount.textContent = total;
     return total;
   }
+  editElement(element) {
+    // console.log(element.attributeList.data - id);
+    let id = parseInt(element.dataset.id);
+    let parent = element.parentElement.parentElement.parentElement;
+    this.expenseList.removeChild(parent);
+    let expense = this.itemList.filter(function(item) {
+      return item.id === id;
+    });
+    this.expenseInput.value = expense[0].title;
+    this.amountInput.value = expense[0].amount;
+    let tempList = this.itemList.filter(function(item) {
+      return item.id !== id;
+    });
+    this.itemList = tempList;
+    this.showBalace();
+
+    // if(element.attributeList.data-id)
+    // element.parentElement.parentElement.remove();
+  }
 }
 
 function eventListener() {
@@ -117,7 +136,14 @@ function eventListener() {
     ui.submitExpenseForm();
     event.preventDefault();
   });
-  expenseList.addEventListener('click', function() {});
+  expenseList.addEventListener('click', function() {
+    if (event.target.parentElement.classList.contains('edit-icon')) {
+      ui.editElement(event.target.parentElement);
+    }
+    if (event.target.parentElement.classList.contains('delete-icon')) {
+      console.log('delete');
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
