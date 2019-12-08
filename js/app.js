@@ -27,7 +27,7 @@ class UI {
     } else {
       this.budgetAmount.textContent = value;
       this.budgetInput.value = '';
-      this.showBalace();
+      this.showBalance();
     }
   }
   submitExpenseForm() {
@@ -50,11 +50,11 @@ class UI {
         title: expenseName,
         amount
       };
-      // this.showBalace();
+     
       this.itemID++;
       this.itemList.push(expense);
       this.addExpense(expense);
-      this.totalExpense();
+      this.showBalance();
     }
   }
   addExpense(expense) {
@@ -77,7 +77,7 @@ class UI {
    </div>`;
     this.expenseList.appendChild(div);
   }
-  showBalace() {
+  showBalance() {
     const expense = this.totalExpense();
     const total = parseInt(this.budgetAmount.textContent) - expense;
     this.balanceAmount.textContent = total;
@@ -114,7 +114,7 @@ class UI {
       return item.id !== id;
     });
     this.itemList = tempList;
-    this.showBalace();
+    this.showBalance();
 
     // if(element.attributeList.data-id)
     // element.parentElement.parentElement.remove();
@@ -127,7 +127,7 @@ class UI {
       return item.id !== id;
     });
     this.itemList = tempList;
-    this.showBalace();
+    this.showBalance();
   }
 }
 
@@ -151,7 +151,7 @@ function eventListener() {
       ui.editElement(event.target.parentElement);
     }
     if (event.target.parentElement.classList.contains('delete-icon')) {
-      console.log('delete');
+      ui.editElement(event.target.parentElement);
     }
   });
 }
