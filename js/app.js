@@ -119,6 +119,16 @@ class UI {
     // if(element.attributeList.data-id)
     // element.parentElement.parentElement.remove();
   }
+  deleteElement(element) {
+    let id = parseInt(element.dataset.id);
+    let parent = element.parentElement.parentElement.parentElement;
+    this.expenseList.removeChild(parent);
+    let tempList = this.itemList.filter(function(item) {
+      return item.id !== id;
+    });
+    this.itemList = tempList;
+    this.showBalace();
+  }
 }
 
 function eventListener() {
