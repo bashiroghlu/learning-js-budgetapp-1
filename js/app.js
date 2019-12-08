@@ -54,7 +54,7 @@ class UI {
       this.itemID++;
       this.itemList.push(expense);
       this.addExpense(expense);
-      
+      this.totalExpense();
     }
   }
   addExpense(expense) {
@@ -94,7 +94,9 @@ class UI {
   }
   totalExpense() {
     let total = 0;
-    
+    if (this.itemList.length > 0) {
+      total = this.itemList.reduce((acc, item) => acc + item.amount, 0);
+    }
     this.expenseAmount.textContent = total;
     return total;
   }
